@@ -1,0 +1,15 @@
+channels:
+  test:
+    address: /test
+    messages:
+      testMessage:
+        bindings:
+          http:
+            statusCode: 200
+            headers:
+              type: object
+              properties:
+                Content-Type:
+                  type: string
+                  enum: ['application/json']
+            bindingVersion: '0.3.0'

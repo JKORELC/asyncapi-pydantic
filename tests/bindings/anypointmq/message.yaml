@@ -1,0 +1,30 @@
+channels:
+  userSignup:
+    address: 'user/signup'
+    messages:
+      #...
+  userSignup:
+    address: 'user/signup'
+    messages:
+      userSignupMessage:
+        headers:
+          type: object
+          properties:
+            correlationId:
+              description: Correlation ID set by application
+              type: string
+        payload:
+          type: object
+          properties:
+            #...
+        correlationId:
+          description: Correlation ID is specified as a header and transmitted in the Anypoint MQ message properties section
+          location:    $message.header#/correlationId
+        bindings:
+          anypointmq:
+            headers:
+              type: object
+              properties:
+                messageId:
+                  type: string
+            bindingVersion: '0.1.0'

@@ -1,0 +1,6 @@
+servers:
+  production:
+    bindings:
+      mqtt5:
+        sessionExpiryInterval: 60
+        bindingVersion: 0.2.0

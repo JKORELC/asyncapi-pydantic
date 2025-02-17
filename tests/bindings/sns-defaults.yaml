@@ -1,0 +1,5 @@
+channels:
+  user-signedup:
+    description:  A user has signed up to our service
+    bindings:
+      sns: {} 

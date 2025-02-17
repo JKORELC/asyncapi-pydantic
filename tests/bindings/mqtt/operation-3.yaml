@@ -1,0 +1,7 @@
+channels:
+  user/signup:
+    subscribe:
+      bindings:
+        mqtt:
+          qos: 2
+          bindingVersion: 0.2.0

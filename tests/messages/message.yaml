@@ -1,0 +1,9 @@
+statusCode: 200
+headers:
+  type: object
+  properties:
+    content-type:
+      type: string
+      enum:
+        - application/json
+bindingVersion: 0.3.0

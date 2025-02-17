@@ -1,0 +1,95 @@
+asyncapi: 3.0.0
+info:
+  title: Example with Anypoint MQ
+  version: 0.0.1
+servers:
+  development:
+    host: mq-us-east-1.anypoint.mulesoft.com
+    pathname: /api
+    protocol: anypointmq
+    protocolVersion: v1
+    description: >
+      Anypoint MQ broker for development, in the US East (N. Virginia) runtime
+      plane 
+
+      under management of the US control plane.
+    security:
+      - $ref: '#/components/securitySchemes/oauthDev'
+  production:
+    host: mq-eu-central-1.eu1.anypoint.mulesoft.com
+    pathname: /api
+    protocol: anypointmq
+    protocolVersion: v1
+    description: >
+      Anypoint MQ broker for production, in the EU Central (Frankfurt) runtime
+      plane 
+
+      under management of the EU control plane.
+    security:
+      - $ref: '#/components/securitySchemes/oauthProd'
+    bindings:
+      anypointmq:
+        bindingVersion: 0.1.0
+channels:
+  user/signup:
+    address: user/signup
+    messages:
+      signUpUser.message:
+        contentType: application/json
+        headers:
+          type: object
+          properties:
+            correlationId:
+              description: Correlation ID set by application
+              type: string
+        payload:
+          type: object
+          properties:
+            username:
+              type: string
+              minLength: 3
+        correlationId:
+          description: >-
+            Correlation ID is specified as a header and transmitted in the
+            Anypoint MQ message properties section
+          location: $message.header#/correlationId
+        bindings:
+          anypointmq:
+            headers:
+              type: object
+              properties:
+                messageId:
+                  type: string
+            bindingVersion: 0.1.0
+    description: >
+      This application receives command messages from this channel about users
+      to sign up.
+    bindings:
+      anypointmq:
+        destination: user-signup-queue
+        destinationType: fifo-queue
+        bindingVersion: 0.1.0
+operations:
+  signUpUser:
+    action: receive
+    channel:
+      $ref: '#/channels/user~1signup'
+    description: >
+      This application receives command messages via this operation about users
+      to sign up.
+    messages:
+      - $ref: '#/channels/user~1signup/messages/signUpUser.message'
+components:
+  securitySchemes:
+    oauthDev:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://mq-us-east-1.anypoint.mulesoft.com/api/v1/authorize'
+          scopes: {}
+    oauthProd:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://mq-eu-central-1.eu1.anypoint.mulesoft.com/api/v1/authorize'
+          scopes: {}

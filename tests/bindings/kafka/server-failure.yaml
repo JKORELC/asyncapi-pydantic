@@ -1,0 +1,7 @@
+servers:
+  production:
+    bindings:
+      kafka:
+        schemaRegistryUrl: ''
+        schemaRegistryVendor: 'confluent'
+        bindingVersion: '0.5.0'

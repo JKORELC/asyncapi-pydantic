@@ -1,0 +1,13 @@
+tags:
+  - name: test-tag-1
+  - name: test-tag-2
+    description: '**MarkDown variant**<br>'
+  - name: test-tag-3
+    description: external docs test
+    externalDocs:
+      description: Find more info here.
+      url: https://example.com
+  - name: test-tag-4
+    description: reference test
+    externalDocs:
+      $ref: '#/components/schemas/Pet'

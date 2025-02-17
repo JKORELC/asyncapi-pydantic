@@ -1,0 +1,16 @@
+channels:
+  userSignup:
+    address: user/signup
+    messages:
+      userSignup:
+        bindings:
+          mqtt:
+            payloadFormatIndicator: 1
+            contentType: "application/json"
+            correlationData:
+              type: string
+              format: uuid
+            responseTopic:
+              type: string
+              pattern: "response/client/([a-z1-9]+)"
+            bindingVersion: 0.2.0

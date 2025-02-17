@@ -1,0 +1,13 @@
+channels:
+  userSignup:
+    address: 'user/signup'
+    description: |
+      This application sends events to this channel about users that have signed up.
+      Explicitly provides a channel binding object.
+    messages: 
+      #...
+    bindings:
+      anypointmq:
+        destination:     user-signup-exchg
+        destinationType: exchange
+        bindingVersion: '0.1.0'

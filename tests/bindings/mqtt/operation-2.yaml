@@ -1,0 +1,10 @@
+channels:
+  user/signup:
+    publish:
+      bindings:
+        mqtt:
+          messageExpiryInterval:
+            type: integer
+            minimum: 30
+            maximum: 300
+          bindingVersion: 0.2.0

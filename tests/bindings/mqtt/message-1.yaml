@@ -1,0 +1,11 @@
+channels:
+  user/signup:
+    subscribe:
+      message:
+        bindings:
+          mqtt:
+            contentType: "application/json"
+            correlationData:
+              type: string
+              format: uuid
+            bindingVersion: 0.2.0
