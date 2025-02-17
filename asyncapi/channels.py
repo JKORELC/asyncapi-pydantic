@@ -73,7 +73,9 @@ class ChannelBindings(AsyncApiExtendable):
     kafka: KafkaChannelBinding | None = Field(None)
     mercure: MercureChannelBinding | None = Field(None)
     mqtt: MqttChannelBinding | None = Field(None)
-    mqtt5: Mqtt5ChannelBinding | None = Field(None, deprecation="Deprecated in favor of MQTT Bindings.")
+    mqtt5: Mqtt5ChannelBinding | None = Field(
+        None, deprecation="Deprecated in favor of MQTT Bindings."
+    )
     nats: NatsChannelBinding | None = Field(None)
     pulsar: PulsarChannelBinding | None = Field(None)
     redis: RedisChannelBinding | None = Field(None)

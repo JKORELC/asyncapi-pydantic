@@ -18,12 +18,4 @@ SchemaFormat = Literal[
 ]
 
 
-SimpleTypes = Literal[
-    "array",
-    "bool",
-    "integer",
-    "null",
-    "number",
-    "object",
-    "string"
-]
+SimpleTypes = Literal["array", "bool", "integer", "null", "number", "object", "string"]

@@ -23,7 +23,6 @@ from yaml import (
 
 from pydantic import (
     Field,
-
     AnyUrl,
     NonNegativeInt,
     PositiveFloat,
@@ -70,7 +69,9 @@ class Bindings(AsyncApiExtendable):
     jms: JmsBinding | None = Field(None)
     kafka: KafkaBinding | None = Field(None)
     mqtt: MqttBinding | None = Field(None)
-    mqtt5: Mqtt1Binding | None = Field(None, deprecated="Deprecated in favor of MQTT bindings") # TODO: set deprecated flag
+    mqtt5: Mqtt1Binding | None = Field(
+        None, deprecated="Deprecated in favor of MQTT bindings"
+    )  # TODO: set deprecated flag
     nats: NatsBinding | None = Field(None)
     ws: Binding | None = Field(None)
     ws: Binding | None = Field(None)
@@ -93,11 +94,11 @@ class Bindings(AsyncApiExtendable):
 
 class CorrelationID(AsyncApiExtendable):
     """
-    An object that specifies an identifier at design time that can 
+    An object that specifies an identifier at design time that can
     be used for message tracing and correlation.
     """
 
-    location: str   # TODO: validate runtime expression?
+    location: str  # TODO: validate runtime expression?
     description: str | None = Field(None)
 
 
@@ -110,15 +111,15 @@ class MultiFormatSchema(AsyncApiExtendable):
     # TODO: cross-validate schema_format X schema
     # See: https://www.asyncapi.com/docs/reference/specification/v3.0.0#multiFormatSchemaObject
     schema_format: str = Field("application/vnd.aai.asyncapi+json;version=3.0.0")
-    schema_: Any = Field(alias="schema") # TODO: fix this data type
+    schema_: Any = Field(alias="schema")  # TODO: fix this data type
 
 
 def Parameter(AsyncApiBase):
     enum: list[str] | None = Field(None)
     default: str | None = Field(None)
-    description: str | None = Field(None)   # TODO: validate CommonMark expression?
+    description: str | None = Field(None)  # TODO: validate CommonMark expression?
     examples: list[str] | None = Field(None)
-    location: str | None = Field(None)      # TODO: validate runtime expression format?
+    location: str | None = Field(None)  # TODO: validate runtime expression format?
 
 
 class Parameters(AsyncApiExtendable):
@@ -146,10 +147,10 @@ class Schema(AsyncApiBase):
     comment: str | None = Field(None, alias="$comment")
     title: str | None = Field(None)
     description: str | None = Field(None)
-    default: Any | None = Field(None)   # TODO: fix this Any
+    default: Any | None = Field(None)  # TODO: fix this Any
     read_only: bool = Field(False)
     write_only: bool = Field(False)
-    examples: list[Any] = Field(None)   # TODO: fix this Any
+    examples: list[Any] = Field(None)  # TODO: fix this Any
     multiple_of: PositiveFloat | None = Field(None)
     maximum: float | None = Field(None)
     exclusive_maximum: float | None = Field(None)
@@ -168,11 +169,11 @@ class Schema(AsyncApiBase):
     min_properties: NonNegativeInt | None = Field(None)
     required: list[str] | None = Field(None)
     additional_properties: Union[Schema, bool] | None = Field(None)
-    definitions: dict[str, Schema] = Field(default_factory=dict)    # TODO: fix this
-    properties: dict[str, Schema] = Field(default_factory=dict)     # TODO: fix this
+    definitions: dict[str, Schema] = Field(default_factory=dict)  # TODO: fix this
+    properties: dict[str, Schema] = Field(default_factory=dict)  # TODO: fix this
     dependencies: dict[str, Union[Schema, list[str]]] | None = Field(None)
     property_names: Schema | None = Field(None)
-    const: Any = None   # TODO: fix this ANy
+    const: Any = None  # TODO: fix this ANy
     enum_: StrEnum | None = Field(None, alias="enum")
     type_: Union[SimpleTypes, list[SimpleTypes]] | None = Field(None, alias="type")
     format_: str | None = Field(None, alias="format")
@@ -196,7 +197,7 @@ class ServerVariable(AsyncApiExtendable):
 
 class Tag(AsyncApiExtendable):
     name: str
-    description: str | None = Field(None)   # TODO: validate CommonMark
+    description: str | None = Field(None)  # TODO: validate CommonMark
     external_docs: ExternalDocumentation | Reference | None = Field(None)
 
 

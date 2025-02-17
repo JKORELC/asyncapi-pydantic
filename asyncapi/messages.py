@@ -62,7 +62,9 @@ class MessageBindings(AsyncApiExtendable):
     kafka: KafkaMessageBinding | None = Field(None)
     mercure: MercureMessageBinding | None = Field(None)
     mqtt: MqttMessageBinding | None = Field(None)
-    mqtt5: Mqtt5MessageBinding | None = Field(None, deprecation="Deprecated in favor of MQTT Bindings.")
+    mqtt5: Mqtt5MessageBinding | None = Field(
+        None, deprecation="Deprecated in favor of MQTT Bindings."
+    )
     nats: NatsMessageBinding | None = Field(None)
     pulsar: PulsarMessageBinding | None = Field(None)
     redis: RedisMessageBinding | None = Field(None)
@@ -75,8 +77,12 @@ class MessageBindings(AsyncApiExtendable):
 
 class MessageExample(AsyncApiExtendable):
     # https://www.asyncapi.com/docs/reference/specification/v3.0.0#messageExampleObject
-    headers: dict[str, MessageHeaders] | None = Field(None)    # TODO: this value MUST validate against Message.headers
-    payload: dict[str, MessagePayload] | None = Field(None)    # TODO: this value MUST validate against Message.payload
+    headers: dict[str, MessageHeaders] | None = Field(
+        None
+    )  # TODO: this value MUST validate against Message.headers
+    payload: dict[str, MessagePayload] | None = Field(
+        None
+    )  # TODO: this value MUST validate against Message.payload
     name: str | None = Field(None)
     summary: str | None = Field(None)
 
@@ -98,14 +104,16 @@ class Message(AsyncApiExtendable):
     headers: MultiFormatSchema | Schema | Reference | None = Field(None)
     payload: MultiFormatSchema | Schema | Reference | None = Field(None)
     correlation_id: CorrelationID | Reference | None = Field(None)
-    content_type: str | None = Field("application/json")  # TODO: validate content_type values
+    content_type: str | None = Field(
+        "application/json"
+    )  # TODO: validate content_type values
     name: str | None = Field(None)
     title: str | None = Field(None)
     summary: str | None = Field(None)
     description: str | None = Field(None)
     tags: Tags | None = Field(None)
     external_docs: ExternalDocumentation | None = Field(None)
-    bindings: Any # MessageBindings | Reference | None
+    bindings: Any  # MessageBindings | Reference | None
     examples: list[MessageExample] | None = Field(None)
     traits: list[MessageTrait] | None = Field(None)
 

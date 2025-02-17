@@ -3,7 +3,6 @@ Reference:
     https://www.asyncapi.com/docs/reference/specification/v3.0.0#securitySchemeObject
 """
 
-
 from typing import Literal
 
 
@@ -17,19 +16,19 @@ from asyncapi.base import AsyncApiBase
 
 
 SecurityTypes = Literal[
-    "userPassword", 
-    "apiKey", 
-    "X509", 
-    "symmetricEncryption", 
-    "asymmetricEncryption", 
-    "httpApiKey", 
-    "http", 
-    "oauth2", 
-    "openIdConnect", 
-    "plain", 
-    "scramSha256", 
+    "userPassword",
+    "apiKey",
+    "X509",
+    "symmetricEncryption",
+    "asymmetricEncryption",
+    "httpApiKey",
+    "http",
+    "oauth2",
+    "openIdConnect",
+    "plain",
+    "scramSha256",
     "scramSha512",
-    "gssapi"
+    "gssapi",
 ]
 
 
@@ -57,7 +56,6 @@ class SecurityScheme(AsyncApiBase):
     flows: OAuthFlows
     open_id_connect_url: str
     scopes: list[str]
-
 
     @field_validator("type_")
     def check_type(cls, value: str) -> str:

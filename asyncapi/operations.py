@@ -3,7 +3,6 @@ Reference:
     https://www.asyncapi.com/docs/reference/specification/v3.0.0#operationsObject
 """
 
-
 from __future__ import annotations
 
 
@@ -13,7 +12,7 @@ from pydantic import Field
 from asyncapi.base import AsyncApiExtendable
 from asyncapi.common import (
     ExternalDocumentation,
-    Reference, 
+    Reference,
     Tags,
 )
 from asyncapi.security import SecurityScheme

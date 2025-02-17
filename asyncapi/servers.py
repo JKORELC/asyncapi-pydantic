@@ -3,7 +3,6 @@ Reference:
     https://www.asyncapi.com/docs/reference/specification/v3.0.0#serversObject
 """
 
-
 from typing import Union
 
 
@@ -65,7 +64,7 @@ class ServerBindings(AsyncApiExtendable):
     redis: RedisServerBinding
     googlepubsub: GooglePubSubServerBinding
     mqtt: MqttServerBinding
-    mqtt5: Mqtt5ServerBinding   # TODO: deprecated
+    mqtt5: Mqtt5ServerBinding  # TODO: deprecated
     kafka: KafkaServerBinding
     jms: JmsServerBinding
     ibmmq: IbmmqServerBinding

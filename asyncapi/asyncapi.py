@@ -1,4 +1,3 @@
-
 from pydantic import (
     Field,
     EmailStr,
@@ -17,7 +16,6 @@ from asyncapi.channels import Channels
 from asyncapi.components import Components
 from asyncapi.servers import Servers
 from asyncapi.operations import Operations
-
 
 
 class Contact(AsyncApiBase):
