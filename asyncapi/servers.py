@@ -13,6 +13,7 @@ from asyncapi.common import (
     AsyncApiExtendable,
     ExternalDocumentation,
     Reference,
+    ServerVariable,
     Tags,
 )
 
@@ -44,32 +45,28 @@ from asyncapi.security import (
 )
 
 
-class ServerVariable(AsyncApiExtendable):
-    enum: list[str] | None = Field(None)
-    default: str | None = Field(None)
-    description: str | None = Field(None)
-    examples: list[str] | None = Field(None)
-
-
 class ServerBindings(AsyncApiExtendable):
-    http: HttpServerBinding
-    ws: WebSocketServerBinding
-    amqp: AmqpServerBinding
-    amqp1: Amqp1ServerBinding
-    aynpointmq: AnypointmqServerBinding
-    nats: NatsServerBinding
-    sns: SnsServerBinding
-    sqs: SqsServerBinding
-    stomp: StompServerBinding
-    redis: RedisServerBinding
-    googlepubsub: GooglePubSubServerBinding
-    mqtt: MqttServerBinding
-    mqtt5: Mqtt5ServerBinding  # TODO: deprecated
-    kafka: KafkaServerBinding
-    jms: JmsServerBinding
-    ibmmq: IbmmqServerBinding
-    solace: SolaceServerBinding
-    pulsar: PulsarServerBinding
+    http: HttpServerBinding | None = Field(None)
+    ws: WebSocketServerBinding | None = Field(None)
+    amqp: AmqpServerBinding | None = Field(None)
+    amqp1: Amqp1ServerBinding | None = Field(None)
+    aynpointmq: AnypointmqServerBinding | None = Field(None)
+    nats: NatsServerBinding | None = Field(None)
+    sns: SnsServerBinding | None = Field(None)
+    sqs: SqsServerBinding | None = Field(None)
+    stomp: StompServerBinding | None = Field(None)
+    redis: RedisServerBinding | None = Field(None)
+    mercuer: MercureServerBinding | None = Field(None)
+    googlepubsub: GooglePubSubServerBinding | None = Field(None)
+    mqtt: MqttServerBinding | None = Field(None)
+    mqtt5: Mqtt5ServerBinding | None = Field(
+        None, deprecated=True, deprecation="Deprecated in favor of MQTT Bindings."
+    )
+    kafka: KafkaServerBinding | None = Field(None)
+    jms: JmsServerBinding | None = Field(None)
+    ibmmq: IbmmqServerBinding | None = Field(None)
+    solace: SolaceServerBinding | None = Field(None)
+    pulsar: PulsarServerBinding | None = Field(None)
 
 
 class Server(AsyncApiExtendable):

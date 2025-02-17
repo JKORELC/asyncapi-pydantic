@@ -33,6 +33,10 @@ SecurityTypes = Literal[
 
 
 class OAuthFlow(AsyncApiBase):
+    """
+    OAuth Flow class.
+    """
+
     authorization_url: str
     token_url: str
     refresh_url: str | None = Field(None)
@@ -40,6 +44,10 @@ class OAuthFlow(AsyncApiBase):
 
 
 class OAuthFlows(AsyncApiBase):
+    """
+    OAuth Flows class.
+    """
+
     implicit: OAuthFlow
     password: OAuthFlow
     client_credentials: OAuthFlow
@@ -47,6 +55,10 @@ class OAuthFlows(AsyncApiBase):
 
 
 class SecurityScheme(AsyncApiBase):
+    """
+    Security Scheme class.
+    """
+
     type_: str
     description: str
     name: str
@@ -58,7 +70,11 @@ class SecurityScheme(AsyncApiBase):
     scopes: list[str]
 
     @field_validator("type_")
-    def check_type(cls, value: str) -> str:
+    def check_type(self, value: str) -> str:
+        """
+        Validate security types.
+        """
+
         if value not in SecurityTypes:
             raise ValueError(f"Invalid security type: {value}")
 

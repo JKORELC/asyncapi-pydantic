@@ -1,3 +1,7 @@
+"""
+AsyncAPI constants.
+"""
+
 from typing import Literal
 
 

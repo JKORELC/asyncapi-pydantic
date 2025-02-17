@@ -1,3 +1,7 @@
+"""
+AsyncAPI Components.
+"""
+
 from typing import Union
 
 
@@ -37,7 +41,11 @@ from asyncapi.security import SecurityScheme
 
 
 class Components(AsyncApiExtendable):
-    schemas: str = Field(pattern="^[\w\d\.\-_]+$")
+    """
+    AsyncAPI Components class.
+    """
+
+    schemas: str = Field(pattern=r"^[\w\d\.\-_]+$")
     servers: dict[str, Union[Server, Reference]]
     channels: dict[str, Union[Channel, Reference]]
     operations: dict[str, Union[Operation, Reference]]

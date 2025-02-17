@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import (
     Annotated,
     Any,
+    ParamSpec,
     Union,
 )
 
@@ -32,7 +33,7 @@ from asyncapi.bindings import (
     SolaceMessageBinding,
     StompMessageBinding,
     SqsMessageBinding,
-    WebSocketBinding,
+    WebSocketMessageBinding,
 )
 
 
@@ -48,11 +49,18 @@ from asyncapi.common import (
 )
 
 
+P = ParamSpec("P")
+
+
 MessageHeaders = Annotated[Union[MultiFormatSchema, Schema, Reference], ...]
 MessagePayload = Annotated[Union[MultiFormatSchema, Schema, Reference], ...]
 
 
 class MessageBindings(AsyncApiExtendable):
+    """
+    AsyncAPI Message Bindings class.
+    """
+
     amqp: AmqpMessageBinding | None = Field(None)
     amqp1: Amqp1MessageBinding | None = Field(None)
     googlepubsub: GooglePubSubMessageBinding | None = Field(None)
@@ -63,7 +71,7 @@ class MessageBindings(AsyncApiExtendable):
     mercure: MercureMessageBinding | None = Field(None)
     mqtt: MqttMessageBinding | None = Field(None)
     mqtt5: Mqtt5MessageBinding | None = Field(
-        None, deprecation="Deprecated in favor of MQTT Bindings."
+        None, deprecated=True, deprecation="Deprecated in favor of MQTT Bindings."
     )
     nats: NatsMessageBinding | None = Field(None)
     pulsar: PulsarMessageBinding | None = Field(None)
@@ -72,10 +80,14 @@ class MessageBindings(AsyncApiExtendable):
     solace: SolaceMessageBinding | None = Field(None)
     stomp: StompMessageBinding | None = Field(None)
     sqs: SqsMessageBinding | None = Field(None)
-    ws: WebsocketMessageBinding | None = Field(None)
+    ws: WebSocketMessageBinding | None = Field(None)
 
 
 class MessageExample(AsyncApiExtendable):
+    """
+    AsyncAPI Message Example class.
+    """
+
     # https://www.asyncapi.com/docs/reference/specification/v3.0.0#messageExampleObject
     headers: dict[str, MessageHeaders] | None = Field(
         None
@@ -88,6 +100,10 @@ class MessageExample(AsyncApiExtendable):
 
 
 class MessageTrait(AsyncApiExtendable):
+    """
+    AsyncAPI Message Trait class.
+    """
+
     headers: MultiFormatSchema | Schema | Reference | None = Field(None)
     correlation_id: CorrelationID | Reference
     content_type: str
@@ -97,10 +113,14 @@ class MessageTrait(AsyncApiExtendable):
     description: str | None = Field(None)
     tags: Tags | None = Field(None)
     external_docs: ExternalDocumentation | None = Field(None)
-    bindings: MessageBinding | Reference | None = Field(None)
+    bindings: MessageBindings | Reference | None = Field(None)
 
 
 class Message(AsyncApiExtendable):
+    """
+    AsyncAPI Message class.
+    """
+
     headers: MultiFormatSchema | Schema | Reference | None = Field(None)
     payload: MultiFormatSchema | Schema | Reference | None = Field(None)
     correlation_id: CorrelationID | Reference | None = Field(None)
@@ -119,6 +139,10 @@ class Message(AsyncApiExtendable):
 
 
 class Messages(AsyncApiBase):
+    """
+    AsyncAPI Messages class.
+    """
+
     def __init__(self, **kwargs: P.kwargs) -> None:
         super().__init__(**kwargs)
         for key, val in kwargs.items():

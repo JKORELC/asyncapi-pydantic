@@ -86,7 +86,7 @@ class ChannelBindings(AsyncApiExtendable):
     mercure: MercureChannelBinding | None = Field(None)
     mqtt: MqttChannelBinding | None = Field(None)
     mqtt5: Mqtt5ChannelBinding | None = Field(
-        None, deprecation="Deprecated in favor of MQTT Bindings."
+        None, deprecated=True, deprecation="Deprecated in favor of MQTT Bindings."
     )
     nats: NatsChannelBinding | None = Field(None)
     pulsar: PulsarChannelBinding | None = Field(None)
