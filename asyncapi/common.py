@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-from annotated_types import MinLen
-from json import loads as json_loads
-from pathlib import Path
 from typing import (
     Annotated,
     Any,
@@ -11,23 +8,15 @@ from typing import (
     TypeVar,
     Union,
 )
-from typing_extensions import (
-    Self,
-    override,
-)
-from yaml import (
-    safe_load as yaml_loads,
-    dump as yaml_dumps,
-)
 
 
+from annotated_types import MinLen
 from pydantic import (
     Field,
     AnyUrl,
     NonNegativeInt,
     PositiveFloat,
 )
-from pydantic.alias_generators import to_camel
 
 
 from asyncapi.base import (
@@ -35,7 +24,6 @@ from asyncapi.base import (
     AsyncApiExtendable,
 )
 from asyncapi.constants import (
-    SchemaFormat,
     SimpleTypes,
 )
 
@@ -52,44 +40,14 @@ Uri = Annotated[str, ...]
 
 
 class DynamicField(AsyncApiExtendable, Generic[T]):
+    """
+    Create dynamic Pydantic models from variable field names.
+    """
+
     def __init__(self, **kwargs: P.kwargs) -> None:
         super().__init__(**kwargs)
         for key, val in kwargs.items():
             setattr(self, key, T.model_validate(val))
-
-
-class Binding(AsyncApiExtendable):
-    binding_version: str | None = Field("latest")
-
-
-class Bindings(AsyncApiExtendable):
-    amqp: AmqpBinding | None = Field(None)
-    amqp1: Amqp1Binding | None = Field(None)
-    anypointmq: AnypointmqBinding | None = Field(None)
-    jms: JmsBinding | None = Field(None)
-    kafka: KafkaBinding | None = Field(None)
-    mqtt: MqttBinding | None = Field(None)
-    mqtt5: Mqtt1Binding | None = Field(
-        None, deprecated="Deprecated in favor of MQTT bindings"
-    )  # TODO: set deprecated flag
-    nats: NatsBinding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
-    ws: Binding | None = Field(None)
 
 
 class CorrelationID(AsyncApiExtendable):
@@ -103,18 +61,30 @@ class CorrelationID(AsyncApiExtendable):
 
 
 class ExternalDocumentation(AsyncApiExtendable):
+    """
+    External Documentation class.
+    """
+
     description: str
     url: str
 
 
 class MultiFormatSchema(AsyncApiExtendable):
+    """
+    Multi-Format Schema class.
+    """
+
     # TODO: cross-validate schema_format X schema
     # See: https://www.asyncapi.com/docs/reference/specification/v3.0.0#multiFormatSchemaObject
     schema_format: str = Field("application/vnd.aai.asyncapi+json;version=3.0.0")
     schema_: Any = Field(alias="schema")  # TODO: fix this data type
 
 
-def Parameter(AsyncApiBase):
+class Parameter(AsyncApiBase):
+    """
+    Parameter class.
+    """
+
     enum: list[str] | None = Field(None)
     default: str | None = Field(None)
     description: str | None = Field(None)  # TODO: validate CommonMark expression?
@@ -123,6 +93,10 @@ def Parameter(AsyncApiBase):
 
 
 class Parameters(AsyncApiExtendable):
+    """
+    Parameters class.
+    """
+
     def __init__(self, **kwargs: P.kwargs) -> None:
         super().__init__(**kwargs)
         for key, val in kwargs.items():
@@ -130,10 +104,17 @@ class Parameters(AsyncApiExtendable):
 
 
 class Reference(AsyncApiBase):
+    """
+    Reference class.
+    """
+
     ref: str = Field(alias="$ref")
 
 
 class Schema(AsyncApiBase):
+    """
+    Schema class.
+    """
 
     # Fixed fields
     discriminator: str | None = Field(None)
@@ -189,6 +170,10 @@ class Schema(AsyncApiBase):
 
 
 class ServerVariable(AsyncApiExtendable):
+    """
+    Server Variable class.
+    """
+
     enum: list[str] | None = Field(None)
     default: str | None = Field(None)
     description: str | None = Field(None)
@@ -196,6 +181,10 @@ class ServerVariable(AsyncApiExtendable):
 
 
 class Tag(AsyncApiExtendable):
+    """
+    Tag class.
+    """
+
     name: str
     description: str | None = Field(None)  # TODO: validate CommonMark
     external_docs: ExternalDocumentation | Reference | None = Field(None)

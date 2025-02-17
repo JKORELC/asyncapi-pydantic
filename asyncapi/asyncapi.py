@@ -1,3 +1,9 @@
+"""
+Reference:
+    https://www.asyncapi.com/docs/reference/specification/v3.0.0
+"""
+
+
 from pydantic import (
     Field,
     EmailStr,
@@ -19,17 +25,29 @@ from asyncapi.operations import Operations
 
 
 class Contact(AsyncApiBase):
+    """
+    AsyncAPI Contact class.
+    """
+
     name: str | None = Field(None)
     url: HttpUrl | None = Field(None)
     email: EmailStr | None = Field(None)
 
 
 class License(AsyncApiExtendable):
+    """
+    AsyncAPI License class.
+    """
+
     name: str
     url: HttpUrl
 
 
 class Info(AsyncApiBase):
+    """
+    AsyncAPI Info class.
+    """
+
     title: str
     version: str
     description: str | None = Field(None)
@@ -41,6 +59,10 @@ class Info(AsyncApiBase):
 
 
 class AsyncApi(AsyncApiBase):
+    """
+    Core AsyncAPI class.
+    """
+
     asyncapi: str = Field("3.0.0")
     id_: str
     default_content_type: str

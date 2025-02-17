@@ -37,13 +37,17 @@ from asyncapi.bindings import (
     SolaceChannelBinding,
     StompChannelBinding,
     SqsChannelBinding,
-    WebSocketBinding,
+    WebSocketChannelBinding,
 )
 
 from asyncapi.messages import Messages
 
 
 class Channel(AsyncApiExtendable):
+    """
+    AsyncAPI Channel class.
+    """
+
     address: str | None = Field(None)
     messages: Messages | None = Field(None)
     title: str | None = Field(None)
@@ -57,6 +61,10 @@ class Channel(AsyncApiExtendable):
 
 
 class Channels(AsyncApiExtendable):
+    """
+    AsyncAPI Channels class.
+    """
+
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         for key, val in kwargs.items():
@@ -64,6 +72,10 @@ class Channels(AsyncApiExtendable):
 
 
 class ChannelBindings(AsyncApiExtendable):
+    """
+    AsyncAPI Channel Bindings class.
+    """
+
     amqp: AmqpChannelBinding | None = Field(None)
     amqp1: Amqp1ChannelBinding | None = Field(None)
     googlepubsub: GooglePubSubChannelBinding | None = Field(None)
@@ -83,4 +95,4 @@ class ChannelBindings(AsyncApiExtendable):
     solace: SolaceChannelBinding | None = Field(None)
     stomp: StompChannelBinding | None = Field(None)
     sqs: SqsChannelBinding | None = Field(None)
-    ws: WebsocketChannelBinding | None = Field(None)
+    ws: WebSocketChannelBinding | None = Field(None)
